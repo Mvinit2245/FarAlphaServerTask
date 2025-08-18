@@ -1,0 +1,31 @@
+name: Deploy Node.js App
+
+on:
+  push:
+    branches:
+      - main   # runs when you push to main branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: ExpressJS server on poert 80
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test
+
+      - name: Build project (if needed)
+        run: npm run build || echo "No build step"
+
+      - name: Deploy
+        run: echo "🚀 Add deployment command here (Render/Heroku/SSH etc.)"
